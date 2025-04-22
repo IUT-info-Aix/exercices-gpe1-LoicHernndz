@@ -1,13 +1,56 @@
 package fr.amu.iut.exercice1;
 
 import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
 
 public class FenetreLogiciel extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        // Code de l'exercice 1
+
+        // Conteneur Principal
+        VBox vbox = new VBox();
+
+        // Menu supérieur
+        Menu menu1 = new Menu("File");
+        MenuItem menuItem1_2 = new MenuItem("Open");
+        MenuItem menuItem1_3 = new MenuItem("Save");
+        MenuItem menuItem1_1 = new MenuItem("New");
+        MenuItem menuItem1_4 = new MenuItem("Close");
+        menu1.getItems().addAll(menuItem1_1,menuItem1_2,menuItem1_3,menuItem1_4);
+
+        Menu menu2 = new Menu("Edit");
+        MenuItem menuItem2_1 = new MenuItem("Cut");
+        MenuItem menuItem2_2 = new MenuItem("Copy");
+        MenuItem menuItem2_3 = new MenuItem("Paste");
+        menu2.getItems().addAll(menuItem2_1,menuItem2_2,menuItem2_3);
+
+        Menu menu3 = new Menu("Help");
+
+        MenuBar menuBar = new MenuBar(menu1, menu2, menu3);
+
+        // Ajout des contrôleurs au conteneur principal
+        vbox.getChildren().addAll(
+            menuBar
+        );
+
+        // Ajout du conteneur à la scene
+        Scene scene = new Scene(vbox);
+
+        // Ajout de la scene à la fenêtre et changement de ses paramètres (dimensions et titre)
+        primaryStage.setScene(scene);
+        primaryStage.setWidth(800);
+        primaryStage.setHeight(600);
+        primaryStage.setTitle("Exercice 1");
+
+        // Affichage de la fenêtre
+        primaryStage.show();
     }
 
     public static void main(String[] args) {
