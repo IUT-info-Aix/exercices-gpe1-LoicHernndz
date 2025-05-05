@@ -20,13 +20,19 @@ public class JeuMain extends Application {
         //Acteurs du jeu
         Personnage pacman = new Pacman();
         Personnage fantome = new Fantome();
+        Obstacle obstacle = new Obstacle();
         // on positionne le fantôme 20 positions vers la droite
-        fantome.setLayoutX(20 * 10);
+        fantome.setLayoutX(640 - 20);
+        fantome.setLayoutY(480 - 20);
+
+        obstacle.setLayoutX(320);
+        obstacle.setLayoutX(240);
         //panneau du jeu
         Pane jeu = new Pane();
         jeu.setPrefSize(640, 480);
         jeu.getChildren().add(pacman);
         jeu.getChildren().add(fantome);
+        jeu.getChildren().add(obstacle);
         root.setCenter(jeu);
         //on construit une scene 640 * 480 pixels
         scene = new Scene(root);
@@ -49,34 +55,35 @@ public class JeuMain extends Application {
      */
     private void deplacer(Personnage j1, Personnage j2) {
         scene.setOnKeyPressed((KeyEvent event) -> {
-            switch (event.getCode()) {
-                case LEFT:
-                    j1.deplacerAGauche();
-                    break;
-                case RIGHT:
-                    j1.deplacerADroite(scene.getWidth());
-                    break;
-                case UP:
-                    j1.deplacerEnHaut();
-                    break;
-                case DOWN:
-                    j1.deplacerEnBas(scene.getWidth());
-                    break;
-                case Q:
-                    j2.deplacerAGauche();
-                    break;
-                case D:
-                    j2.deplacerADroite(scene.getWidth());
-                    break;
-                case Z:
-                    j2.deplacerEnHaut();
-                    break;
-                case S:
-                    j2.deplacerEnBas(scene.getWidth());
-                    break;
+            if (!j1.estEnCollision(j2)) {
+                switch (event.getCode()) {
+                    case LEFT:
+                        j1.deplacerAGauche();
+                        break;
+                    case RIGHT:
+                        j1.deplacerADroite(scene.getWidth());
+                        break;
+                    case UP:
+                        j1.deplacerEnHaut();
+                        break;
+                    case DOWN:
+                        j1.deplacerEnBas(scene.getHeight());
+                        break;
+
+                    case Q:
+                        j2.deplacerAGauche();
+                        break;
+                    case D:
+                        j2.deplacerADroite(scene.getWidth());
+                        break;
+                    case Z:
+                        j2.deplacerEnHaut();
+                        break;
+                    case S:
+                        j2.deplacerEnBas(scene.getHeight());
+                        break;
+                }
             }
-            if (j1.estEnCollision(j2))
-                System.out.println("Collision....");
         });
     }
 
