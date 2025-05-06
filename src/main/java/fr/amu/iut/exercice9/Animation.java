@@ -15,6 +15,7 @@ public class Animation extends Application {
         BorderPane root = new BorderPane();
         CustomButton customButton = new CustomButton();
         root.setCenter(customButton);
+
         Scene scene = new Scene(root, 400, 400);
 
         Duration duration = Duration.millis(1500);
